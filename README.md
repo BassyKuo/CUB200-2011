@@ -21,7 +21,7 @@ All images from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
 
 	Then run `center_crop.py` to process the raw images. For example:
 	
-		$ python3 center_crop.py -dd <dataset_path> -ii <dataset_path>/images.txt -bb <dataset_path>/bounding_boxes.txt -os '80,80'
+		$ python3 center_crop.py -dd CUB_200_2011/ -ii CUB_200_2011/images.txt -bb CUB_200_2011/bounding_boxes.txt -os '80,80'
 
 	Try `python3 center_crop.py -h` to see more information how to use.
 

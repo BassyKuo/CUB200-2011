@@ -24,7 +24,7 @@ def make_args():
 
 if __name__ == '__main__':
     args = make_args()
-    output_size = args.output_size.split(',')
+    output_size = [int(float(n)) for n in args.output_size.split(',')]
 
     bounding_boxes = {}
     with open(args.images_id, 'r') as f:
