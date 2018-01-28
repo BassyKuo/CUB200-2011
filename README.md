@@ -1,6 +1,7 @@
-# CUB200-2011
+# CUB200-2011-crop
 
-All images from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
+All crop images from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
+If the CUB200 dataset is helpful to you, please cite this official website.
 
 ## Steps
 
@@ -10,19 +11,21 @@ All images from http://www.vision.caltech.edu/visipedia/CUB-200-2011.html
 
 		$ ./download.sh
 
-	(Before using, make sure you have installed `wget` and `tar` daemon.)
+	(Make sure you have installed `wget` and `tar` daemon before you execute the script.)
 
 
-2. Check the following python packages required:
+2. Extract tgz files to `CUB_200_2011` folder, or any path you want. 
+
+	Now check the following python packages required:
 	* os
 	* numpy
 	* argparse
 	* scipy
 
-	Then run `center_crop.py` to process the raw images. For example:
-	
-		$ python3 center_crop.py -dd CUB_200_2011/ -ii CUB_200_2011/images.txt -bb CUB_200_2011/bounding_boxes.txt -os '80,80'
+	and run `center_crop.py` to process the raw images. For example:
+
+		$ python3 center_crop.py -dd CUB_200_2011/ -os '80,80' -od 'center_crop/'
 
 	Try `python3 center_crop.py -h` to see more information how to use.
 
-3. All crop-images saved in `<dataset_path>/center_crop/`. You can also see the pair list of crop-images and crop-segmentations in `images_seg.txt`.
+3. All crop-images and crop-segmentations saved in `<dataset_path>/center_crop/`.

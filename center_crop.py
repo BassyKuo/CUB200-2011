@@ -13,13 +13,25 @@ BOUNDING_BOXES_TXT = 'bounding_boxes.txt'
 
 CENTER_CROP_FOLDER = 'center_crop/' # the folder saved center-crop images and segmentations
 
+#######################################
+#####    [DEFAULT FOLDER TREE]    #####
+#######################################
+## --- DATA_DIR/
+##  +-- IMAGES_FOLDER/
+##  +-- SEGMENTATION_FOLDER/
+##  +-- IMAGES_ID_TXT
+##  +-- BOUNDING_BOXES_TXT
+##  +-- CENTER_CROP_FOLDER/ [CREATE]
+#######################################
+
 
 def make_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-dd', '--data_dir', default=DATA_DIR, help='the directory including `images/` and `segmentation/` folder of CUB200_2011 [default: %(default)s]')
-    parser.add_argument('-ii', '--images_id', default=os.path.join(DATA_DIR,IMAGES_ID_TXT), help='image id file path [default: %(default)s]')
-    parser.add_argument('-bb', '--bounding_boxes', default=os.path.join(DATA_DIR,BOUNDING_BOXES_TXT), help='bounding boxes file path [default: %(default)s]')
+    parser.add_argument('-dd', '--data_dir', default=DATA_DIR, help='the parent directory including `images/``segmentation/` folders and `images.txt``bounding_boxes.txt` files of CUB200_2011 [default: %(default)s]')
+    parser.add_argument('-ii', '--images_id', default=IMAGES_ID_TXT, help='image id file name [default: %(default)s]')
+    parser.add_argument('-bb', '--bounding_boxes', default=BOUNDING_BOXES_TXT, help='bounding boxes file name [default: %(default)s]')
     parser.add_argument('-os', '--output_size', default='80,80', help='resize images [default: %(default)s]')
+    parser.add_argument('-od', '--output_dir', default=CENTER_CROP_FOLDER, help='create a new directory to save processing images [default: %(default)s]')
     return parser.parse_args()
 
 if __name__ == '__main__':
@@ -27,9 +39,9 @@ if __name__ == '__main__':
     output_size = [int(float(n)) for n in args.output_size.split(',')]
 
     bounding_boxes = {}
-    with open(args.images_id, 'r') as f:
+    with open(os.path.join(args.data_dir, args.images_id), 'r') as f:
         images_id = [line.strip().split(' ') for line in f]
-    with open(args.bounding_boxes, 'r') as f:
+    with open(os.path.join(args.data_dir, args.bounding_boxes), 'r') as f:
         for line in f:
             l = line.strip().split(' ')
             bounding_boxes[l[0]] = l[1:]
@@ -115,7 +127,7 @@ if __name__ == '__main__':
         return img[offset_h : offset_h + int(ho),
                    offset_w : offset_w + int(wo)]
 
-    cc_dir = os.path.join(args.data_dir, CENTER_CROP_FOLDER)
+    cc_dir = os.path.join(args.data_dir, args.output_dir)
     cc_img_dir = os.path.join(cc_dir, IMAGES_FOLDER)
     cc_seg_dir = os.path.join(cc_dir, SEGMENTATION_FOLDER)
     try:
