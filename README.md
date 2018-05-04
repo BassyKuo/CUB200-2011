@@ -11,7 +11,7 @@ If the CUB200 dataset is helpful to you, please cite this official website.
 
 		$ ./download.sh
 
-	(Make sure you have installed `wget` and `tar` daemon before you execute the script.)
+	(Make sure you have installed `wget` and `tar` before you execute the script.)
 
 
 2. Extract tgz files to `CUB_200_2011` folder, or any path you want. 
